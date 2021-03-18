@@ -3,6 +3,7 @@ package de.weapie.npc;
 import com.github.juliarn.npc.NPCPool;
 import de.weapie.npc.customNPC.CustomNPC;
 import de.weapie.npc.listener.PlayerNPCInteractListener;
+import de.weapie.npc.scheduler.PlayerNPCDistanceSched;
 import de.weapie.npc.test.TestNPC;
 import lombok.Getter;
 import org.bukkit.Bukkit;
@@ -57,6 +58,9 @@ public class Main extends JavaPlugin {
 
         /* Register listener to interact with NPCs */
         Bukkit.getPluginManager().registerEvents(new PlayerNPCInteractListener(), this);
+
+        /* Start scheduler to kick of the player from npc */
+        PlayerNPCDistanceSched.startDistanceScheduler(2.0D, 1.4D, 0.7D);
     }
 
 }
