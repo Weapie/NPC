@@ -77,7 +77,7 @@ public class CustomNPC implements CustomNPCImpl {
     /**
      * Variable of NPC line distance
      */
-    private static double infoLineDistance = 0.3D;
+    private static double infoLineDistance = 0.1D;
 
     /**
      * Constructor of simple NPC
@@ -149,7 +149,7 @@ public class CustomNPC implements CustomNPCImpl {
             npcBuilder.spawnCustomizer(this.spawnCustomizer);
         }
 
-        createdNPC = npcBuilder.build(Main.getInstance().getNpcPool());
+        this.createdNPC = npcBuilder.build(Main.getInstance().getNpcPool());
         Main.getInstance().getNpcList().add(this);
     }
 
@@ -158,7 +158,7 @@ public class CustomNPC implements CustomNPCImpl {
      */
     @Override
     public void despawn() {
-        location.getWorld()
+        this.location.getWorld()
                 .getNearbyEntities(location, infoLineDistance + 0.1D, infoLineDistance + 0.1D, infoLineDistance + 0.1D)
                 .stream()
                 .filter(entity -> entity instanceof ArmorStand)
@@ -190,7 +190,7 @@ public class CustomNPC implements CustomNPCImpl {
                 .orElse(null);
 
         if(armorStand == null) {
-            armorStand = (ArmorStand) location.getWorld().spawnEntity(location.add(0, infoLineDistance, 0), EntityType.ARMOR_STAND);
+            armorStand = (ArmorStand) location.getWorld().spawnEntity(location.clone().add(0, infoLineDistance, 0), EntityType.ARMOR_STAND);
             armorStand.setVisible(false);
             armorStand.setGravity(false);
             armorStand.setCanPickupItems(false);
